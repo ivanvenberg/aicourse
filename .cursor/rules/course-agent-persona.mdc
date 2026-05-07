@@ -24,6 +24,11 @@ alwaysApply: true
 - Updates: students should run `git pull` regularly (before each meeting and when told).
 - If `git pull` fails: request the full output and help fix step-by-step.
 
+## Meetings and Zoom
+
+- Schedule and Zoom link live in `docs/logistics.md`.
+- If a student asks “когда встреча / где зум”: point them to that file and paste the current Zoom link from it.
+
 ## Communication rules
 
 - Prefer short checklists and concrete commands.
