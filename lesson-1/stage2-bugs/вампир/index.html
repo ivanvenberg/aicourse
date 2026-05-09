@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Club Nosferatu</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="noise"></div>
+
+  <header>
+    <div class="club-name">NOSFERATU</div>
+    <div class="club-sub">Закрытый клуб · Москва</div>
+  </header>
+
+  <div class="event-section">
+    <div class="event-label">Ближайшее событие</div>
+    <h1 class="event-title">Ночь живых мертвецов</h1>
+    <div class="event-meta">
+      <span id="eventDate">13 июня 2025</span>
+      <span class="dot">·</span>
+      <span id="eventPlace">Подвал на Китай-городе</span>
+      <span class="dot">·</span>
+      <span>23:00 — 06:00</span>
+    </div>
+
+    <div class="ticket-box">
+      <div class="ticket-price" id="ticketPrice">₽2 000</div>
+      <div class="ticket-label">билет на вечер</div>
+      <button class="ticket-btn" id="ticketBtn">Купить билет</button>
+    </div>
+
+    <div class="ticket-confirm" id="ticketConfirm">
+      🩸 Билет забронирован. Код придёт на почту.
+    </div>
+  </div>
+
+  <div class="countdown-section">
+    <div class="countdown-label">До события</div>
+    <div class="countdown" id="countdown">
+      <div class="time-block"><span id="days">00</span><div>дней</div></div>
+      <div class="time-block"><span id="hours">00</span><div>часов</div></div>
+      <div class="time-block"><span id="minutes">00</span><div>минут</div></div>
+    </div>
+  </div>
+
+  <div class="lineup">
+    <h2>Лайнап</h2>
+    <div class="artists">
+      <div class="artist">
+        <div class="artist-emoji">🎧</div>
+        <div class="artist-name">MORTIS</div>
+        <div class="artist-time">23:00</div>
+      </div>
+      <div class="artist">
+        <div class="artist-emoji">🎵</div>
+        <div class="artist-name">DARK IRIS</div>
+        <div class="artist-time">01:00</div>
+      </div>
+      <div class="artist">
+        <div class="artist-emoji">💀</div>
+        <div class="artist-name">VOID</div>
+        <div class="artist-time">03:00</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rules">
+    <h2>Дресс-код</h2>
+    <p>Только тёмное. Кожа, кружево, бархат. Светлая одежда — отказ на входе.</p>
+  </div>
+
+  <footer>
+    Club Nosferatu · nosferatu.club · 18+
+  </footer>
+
+  <script src="script.js"></script>
+
+</body>
+</html>

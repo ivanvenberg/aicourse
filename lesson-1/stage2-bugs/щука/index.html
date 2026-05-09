@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Щука — Рыбный ресторан</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <div class="logo">🐟 ЩУКА</div>
+    <div class="tagline">Рыбный ресторан · Свежий улов каждый день</div>
+    <div class="hours">Пн–Пт: 12:00–23:00 · Сб–Вс: 11:00–00:00</div>
+  </header>
+
+  <div class="catch-of-day">
+    <div class="catch-label">Улов дня</div>
+    <div class="catch-content">
+      <div class="catch-emoji">🐟</div>
+      <div class="catch-info">
+        <h2 id="catchName">Дорада на гриле</h2>
+        <p id="catchDesc">Свежая дорада, пойманная сегодня утром. Подаётся с лимоном, каперсами и картофелем.</p>
+        <div class="catch-price" id="catchPrice">₽1 890</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="menu">
+    <h2>Меню</h2>
+
+    <div class="menu-category">
+      <h3>Закуски</h3>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Тартар из лосося</div>
+          <div class="item-desc">С авокадо, икрой тобико, огурцом</div>
+        </div>
+        <div class="item-price">₽890</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Устрицы (6 шт)</div>
+          <div class="item-desc">С лимоном и соусом мигnonette</div>
+        </div>
+        <div class="item-price">₽1 400</div>
+      </div>
+    </div>
+
+    <div class="menu-category">
+      <h3>Горячее</h3>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Стейк из тунца</div>
+          <div class="item-desc">Medium rare, с соусом терияки и кунжутом</div>
+        </div>
+        <div class="item-price">₽2 100</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-left">
+          <div class="item-name">Ризотто с морепродуктами</div>
+          <div class="item-desc">Креветки, мидии, кальмар, пармезан</div>
+        </div>
+        <div class="item-price">₽1 650</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="reservation">
+    <h2>Забронировать стол</h2>
+    <div class="res-form">
+      <input type="text" id="resName" placeholder="Ваше имя">
+      <input type="text" id="resPhone" placeholder="Телефон">
+      <select id="resGuests">
+        <option>2 гостя</option>
+        <option>3 гостя</option>
+        <option>4 гостя</option>
+        <option>5+ гостей</option>
+      </select>
+      <input type="date" id="resDate">
+      <button id="resBtn">Забронировать</button>
+    </div>
+    <div class="res-confirm" id="resConfirm">
+      ✓ Стол забронирован! Ждём вас.
+    </div>
+  </div>
+
+  <footer>
+    🐟 Щука · Набережная реки Москвы, 12 · +7 495 000-00-00
+  </footer>
+
+  <script src="script.js"></script>
+
+</body>
+</html>

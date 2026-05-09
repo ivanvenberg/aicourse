@@ -1,0 +1,92 @@
+/* Обнуляем отступы у всех элементов */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Стиль всей страницы */
+body {
+  background: #0f0f0f;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Центральный блок */
+.page {
+  text-align: center;
+  padding: 40px;
+  max-width: 500px;
+}
+
+/* Аватар — большой эмодзи */
+.avatar {
+  font-size: 80px;
+  margin-bottom: 24px;
+}
+
+/* Имя */
+h1 {
+  font-size: 36px;
+  margin-bottom: 16px;
+  color: #ffffff;
+}
+
+/* Описание */
+.bio {
+  font-size: 16px;
+  color: #888888;
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+/* Ссылки */
+.links {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.links a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 14px;
+  padding: 8px 20px;
+  border: 1px solid #333;
+  border-radius: 20px;
+  transition: border-color 0.3s;
+}
+
+.links a:hover {
+  border-color: #ffffff;
+}
+
+/* Кнопка */
+button {
+  background: #ffffff;
+  color: #0f0f0f;
+  border: none;
+  padding: 14px 32px;
+  font-size: 15px;
+  font-family: Arial, sans-serif;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background: #cccccc;
+}
+
+/* Секретный текст — появляется после нажатия */
+.secret {
+  margin-top: 24px;
+  font-size: 16px;
+  color: #888888;
+  min-height: 24px;
+}

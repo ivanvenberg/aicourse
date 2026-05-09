@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Кактусная лавка</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <div class="logo">🌵 Кактусная лавка</div>
+    <div class="tagline">Живые растения с характером</div>
+  </header>
+
+  <div class="hero">
+    <h1>Растение месяца</h1>
+    <div class="featured-plant">
+      <div class="plant-emoji">🌵</div>
+      <div class="plant-info">
+        <h2 id="plantName">Цереус гигантский</h2>
+        <p class="plant-desc">Величественный кактус родом из пустынь Аризоны. Живёт до 200 лет. Неприхотлив в уходе — поливай раз в месяц.</p>
+        <div class="plant-price" id="plantPrice">₽2 400</div>
+        <button class="buy-btn" id="buyBtn">Купить сейчас</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="catalog">
+    <h2>Наша коллекция</h2>
+    <div class="grid">
+
+      <div class="card">
+        <div class="card-emoji">🌱</div>
+        <div class="card-name">Эхинокактус</div>
+        <div class="card-price">₽890</div>
+        <button class="add-btn" data-name="Эхинокактус" data-price="890">В корзину</button>
+      </div>
+
+      <div class="card">
+        <div class="card-emoji">🪴</div>
+        <div class="card-name">Маммиллярия</div>
+        <div class="card-price">₽650</div>
+        <button class="add-btn" data-name="Маммиллярия" data-price="650">В корзину</button>
+      </div>
+
+      <div class="card">
+        <div class="card-emoji">🌵</div>
+        <div class="card-name">Опунция</div>
+        <div class="card-price">₽1 200</div>
+        <button class="add-btn" data-name="Опунция" data-price="1200">В корзину</button>
+      </div>
+
+      <div class="card">
+        <div class="card-emoji">🌿</div>
+        <div class="card-name">Алоэ вера</div>
+        <div class="card-price">₽450</div>
+        <button class="add-btn" data-name="Алоэ вера" data-price="450">В корзину</button>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="cart-section">
+    <h2>Корзина</h2>
+    <div class="cart-empty" id="cartEmpty">Корзина пуста — добавьте растения!</div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-footer" id="cartFooter" style="display:none">
+      <div class="cart-total">Итого: <span id="totalPrice">₽0</span></div>
+      <button class="checkout-btn" id="checkoutBtn">Оформить заказ</button>
+    </div>
+  </div>
+
+  <div class="success-msg" id="successMsg">
+    🌵 Заказ оформлен! Ваши кактусы едут к вам.
+  </div>
+
+  <footer>
+    Кактусная лавка · Москва · Работаем каждый день с 10 до 21
+  </footer>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
