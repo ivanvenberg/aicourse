@@ -1,0 +1,20 @@
+name: Deploy Mood Button to Vercel
+
+on:
+  workflow_dispatch:
+    inputs:
+      vercel_token:
+        description: "Vercel token (from vercel.com/account/tokens)"
+        required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy to Vercel
+        run: |
+          cd tiny-project
+          npm install -g vercel@latest --silent
+          vercel deploy --prod --yes --token "${{ github.event.inputs.vercel_token }}"
