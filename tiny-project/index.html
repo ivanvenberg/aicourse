@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mood Button</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: system-ui, sans-serif;
+      background: #0f0f0f;
+      color: #fff;
+      transition: background 0.6s ease;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.4rem;
+      letter-spacing: -0.02em;
+    }
+
+    p {
+      color: #888;
+      margin-bottom: 2.5rem;
+      font-size: 1rem;
+    }
+
+    button {
+      padding: 0.9rem 2.2rem;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      background: #fff;
+      color: #0f0f0f;
+      font-weight: 600;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 4px 20px rgba(255,255,255,0.15);
+    }
+
+    button:hover { transform: scale(1.06); box-shadow: 0 6px 28px rgba(255,255,255,0.25); }
+    button:active { transform: scale(0.97); }
+
+    #emoji {
+      font-size: 5rem;
+      margin-bottom: 1rem;
+      display: block;
+      transition: transform 0.3s cubic-bezier(.34,1.56,.64,1);
+    }
+
+    #msg {
+      font-size: 1.25rem;
+      min-height: 1.8rem;
+      margin-bottom: 2rem;
+      font-weight: 500;
+    }
+
+    #counter {
+      margin-top: 2rem;
+      color: #555;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+  <span id="emoji">✨</span>
+  <h1>How are you?</h1>
+  <p>Press the button and find out.</p>
+  <div id="msg"></div>
+  <button onclick="next()">Tell me</button>
+  <div id="counter">0 vibes generated</div>
+
+  <script>
+    const states = [
+      { emoji: "🔥", msg: "You're on fire today.", bg: "#1a0a00" },
+      { emoji: "😎", msg: "Cooler than the other side of the pillow.", bg: "#001a2e" },
+      { emoji: "🌿", msg: "Taking it slow. Respect.", bg: "#001a0a" },
+      { emoji: "⚡", msg: "Electric. Unstoppable.", bg: "#0d0020" },
+      { emoji: "🌊", msg: "Go with the flow.", bg: "#00111a" },
+      { emoji: "🎯", msg: "Locked in. Focused.", bg: "#1a1000" },
+      { emoji: "🦋", msg: "Something is transforming.", bg: "#1a001a" },
+      { emoji: "🌙", msg: "Quiet power.", bg: "#06060f" },
+    ];
+
+    let count = 0;
+
+    function next() {
+      const s = states[count % states.length];
+      document.getElementById("emoji").textContent = s.emoji;
+      document.getElementById("msg").textContent = s.msg;
+      document.getElementById("emoji").style.transform = "scale(1.3)";
+      document.body.style.background = s.bg;
+      setTimeout(() => document.getElementById("emoji").style.transform = "scale(1)", 300);
+      count++;
+      document.getElementById("counter").textContent = `${count} vibe${count === 1 ? "" : "s"} generated`;
+    }
+  </script>
+
+</body>
+</html>
