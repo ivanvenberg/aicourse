@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Трекер правок</title>
+<style>
+  body { font-family: Arial, sans-serif; max-width: 600px; margin: 50px auto; padding: 20px; background: #fff8f0; }
+  h1 { color: #e05d00; }
+  .form-row { display: flex; gap: 10px; margin-bottom: 20px; }
+  input { flex: 1; padding: 10px; font-size: 16px; border: 1px solid #ddd; border-radius: 8px; }
+  button { padding: 10px 20px; background: #e05d00; color: white; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; }
+  .item { display: flex; justify-content: space-between; align-items: center; padding: 12px; margin: 8px 0; background: white; border-radius: 8px; border: 1px solid #eee; }
+  .done { text-decoration: line-through; opacity: 0.5; }
+  .count { font-size: 14px; color: #999; margin-top: 20px; }
+</style>
+</head>
+<body>
+  <h1>📋 Трекер правок</h1>
+  <p>Добавляй правки от клиентов и отмечай выполненные</p>
+
+  <div class="form-row">
+    <!-- ОШИБКА: id кнопки "addBtn" но в JS ищется "add-button" -->
+    <input id="editInput" placeholder="Например: поменять цвет кнопки на синий" />
+    <button id="addBtn">Добавить</button>
+  </div>
+
+  <div id="list"></div>
+  <div class="count" id="count">Правок: 0</div>
+
+  <script>
+    const edits = [];
+
+    document.getElementById('add-button').addEventListener('click', () => {
+      const val = document.getElementById('editInput').value.trim();
+      if (!val) return;
+      edits.push({ text: val, done: false });
+      document.getElementById('editInput').value = '';
+      render();
+    });
+
+    function render() {
+      const list = document.getElementById('list');
+      list.innerHTML = edits.map((e, i) => `
+        <div class="item">
+          <span class="${e.done ? 'done' : ''}">${e.text}</span>
+          <button onclick="toggle(${i})">${e.done ? '↩ Вернуть' : '✓ Готово'}</button>
+        </div>
+      `).join('');
+      document.getElementById('count').textContent = `Правок: ${edits.length} (выполнено: ${edits.filter(e=>e.done).length})`;
+    }
+
+    function toggle(i) {
+      edits[i].done = !edits[i].done;
+      render();
+    }
+  </script>
+</body>
+</html>

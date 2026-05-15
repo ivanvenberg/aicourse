@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Калькулятор сметы</title>
+<style>
+  body { font-family: Arial, sans-serif; max-width: 600px; margin: 50px auto; padding: 20px; background: #f0f4ff; }
+  h1 { color: #1a56db; }
+  .field { margin-bottom: 16px; }
+  label { display: block; margin-bottom: 4px; font-weight: bold; color: #333; }
+  input { width: 100%; padding: 10px; font-size: 16px; border: 1px solid #ddd; border-radius: 8px; }
+  button { padding: 12px 28px; background: #1a56db; color: white; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; margin-top: 8px; }
+  /* ОШИБКА: результат скрыт и код его не показывает */
+  #result { display: none; margin-top: 24px; padding: 20px; background: white; border-radius: 12px; border: 2px solid #1a56db; }
+  .total { font-size: 24px; font-weight: bold; color: #1a56db; margin-top: 12px; }
+</style>
+</head>
+<body>
+  <h1>💰 Калькулятор сметы</h1>
+  <p>Быстро посчитай стоимость проекта</p>
+
+  <div class="field">
+    <label>Часов на проект</label>
+    <input type="number" id="hours" placeholder="Например: 40" min="1" />
+  </div>
+  <div class="field">
+    <label>Ставка в час (₽)</label>
+    <input type="number" id="rate" placeholder="Например: 3000" min="100" />
+  </div>
+  <div class="field">
+    <label>Срочность (%)</label>
+    <input type="number" id="urgency" placeholder="0 — без срочности, 30 — срочно" min="0" max="100" />
+  </div>
+
+  <button onclick="calculate()">Рассчитать</button>
+
+  <div id="result">
+    <strong>Итого по смете:</strong>
+    <div id="breakdown"></div>
+    <div class="total" id="total"></div>
+  </div>
+
+  <script>
+    function calculate() {
+      const hours = parseFloat(document.getElementById('hours').value) || 0;
+      const rate = parseFloat(document.getElementById('rate').value) || 0;
+      const urgency = parseFloat(document.getElementById('urgency').value) || 0;
+
+      const base = hours * rate;
+      const urgencyAmount = base * (urgency / 100);
+      const total = base + urgencyAmount;
+
+      document.getElementById('breakdown').innerHTML = `
+        <p>Базовая стоимость: ${base.toLocaleString('ru')} ₽</p>
+        <p>Надбавка за срочность: +${urgencyAmount.toLocaleString('ru')} ₽</p>
+      `;
+      document.getElementById('total').textContent = `Итого: ${total.toLocaleString('ru')} ₽`;
+
+      // ОШИБКА: забыли показать #result после расчёта
+    }
+  </script>
+</body>
+</html>

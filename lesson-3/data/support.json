@@ -1,0 +1,182 @@
+[
+  {
+    "ticket_id": 1,
+    "issue": "Не могу войти в аккаунт",
+    "month": "2025-01",
+    "resolved": true
+  },
+  {
+    "ticket_id": 2,
+    "issue": "Как отменить подписку",
+    "month": "2024-12",
+    "resolved": true
+  },
+  {
+    "ticket_id": 3,
+    "issue": "Где найти мои данные",
+    "month": "2024-11",
+    "resolved": false
+  },
+  {
+    "ticket_id": 4,
+    "issue": "Ошибка при оплате",
+    "month": "2025-01",
+    "resolved": true
+  },
+  {
+    "ticket_id": 5,
+    "issue": "Как отменить подписку",
+    "month": "2024-12",
+    "resolved": false
+  },
+  {
+    "ticket_id": 6,
+    "issue": "Не пришло письмо с подтверждением",
+    "month": "2025-01",
+    "resolved": true
+  },
+  {
+    "ticket_id": 7,
+    "issue": "Ошибка при оплате",
+    "month": "2024-11",
+    "resolved": false
+  },
+  {
+    "ticket_id": 8,
+    "issue": "Деньги списались но доступ не открылся",
+    "month": "2024-11",
+    "resolved": true
+  },
+  {
+    "ticket_id": 9,
+    "issue": "Не работает кнопка сохранить",
+    "month": "2024-12",
+    "resolved": true
+  },
+  {
+    "ticket_id": 10,
+    "issue": "Не работает кнопка сохранить",
+    "month": "2024-12",
+    "resolved": false
+  },
+  {
+    "ticket_id": 11,
+    "issue": "Не работает кнопка сохранить",
+    "month": "2024-11",
+    "resolved": false
+  },
+  {
+    "ticket_id": 12,
+    "issue": "Ошибка при оплате",
+    "month": "2024-12",
+    "resolved": true
+  },
+  {
+    "ticket_id": 13,
+    "issue": "Не пришло письмо с подтверждением",
+    "month": "2024-11",
+    "resolved": true
+  },
+  {
+    "ticket_id": 14,
+    "issue": "Как отменить подписку",
+    "month": "2024-12",
+    "resolved": true
+  },
+  {
+    "ticket_id": 15,
+    "issue": "Не пришло письмо с подтверждением",
+    "month": "2025-01",
+    "resolved": false
+  },
+  {
+    "ticket_id": 16,
+    "issue": "Деньги списались но доступ не открылся",
+    "month": "2024-12",
+    "resolved": true
+  },
+  {
+    "ticket_id": 17,
+    "issue": "Деньги списались но доступ не открылся",
+    "month": "2024-12",
+    "resolved": false
+  },
+  {
+    "ticket_id": 18,
+    "issue": "Не могу войти в аккаунт",
+    "month": "2024-12",
+    "resolved": true
+  },
+  {
+    "ticket_id": 19,
+    "issue": "Как отменить подписку",
+    "month": "2024-11",
+    "resolved": true
+  },
+  {
+    "ticket_id": 20,
+    "issue": "Не могу войти в аккаунт",
+    "month": "2024-11",
+    "resolved": false
+  },
+  {
+    "ticket_id": 21,
+    "issue": "Не могу войти в аккаунт",
+    "month": "2024-11",
+    "resolved": false
+  },
+  {
+    "ticket_id": 22,
+    "issue": "Не работает кнопка сохранить",
+    "month": "2025-01",
+    "resolved": true
+  },
+  {
+    "ticket_id": 23,
+    "issue": "Деньги списались но доступ не открылся",
+    "month": "2024-11",
+    "resolved": false
+  },
+  {
+    "ticket_id": 24,
+    "issue": "Не работает кнопка сохранить",
+    "month": "2025-01",
+    "resolved": true
+  },
+  {
+    "ticket_id": 25,
+    "issue": "Деньги списались но доступ не открылся",
+    "month": "2025-01",
+    "resolved": true
+  },
+  {
+    "ticket_id": 26,
+    "issue": "Не пришло письмо с подтверждением",
+    "month": "2025-01",
+    "resolved": true
+  },
+  {
+    "ticket_id": 27,
+    "issue": "Не пришло письмо с подтверждением",
+    "month": "2024-12",
+    "resolved": false
+  },
+  {
+    "ticket_id": 28,
+    "issue": "Где найти мои данные",
+    "month": "2024-12",
+    "resolved": true
+  },
+  {
+    "ticket_id": 29,
+    "issue": "Ошибка при оплате",
+    "month": "2024-12",
+    "resolved": false
+  },
+  {
+    "ticket_id": 30,
+    "issue": "Деньги списались но доступ не открылся",
+    "month": "2024-11",
+    "resolved": false
+  }
+]
