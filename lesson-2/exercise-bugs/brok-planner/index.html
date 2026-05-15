@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Планировщик недели</title>
+<style>
+  body { font-family: Arial, sans-serif; max-width: 600px; margin: 50px auto; padding: 20px; background: #f8f4ff; }
+  h1 { color: #7c3aed; }
+  .day-row { display: flex; gap: 10px; margin-bottom: 10px; align-items: center; }
+  .day-label { width: 110px; font-weight: bold; color: #555; flex-shrink: 0; }
+  input[type="text"] { flex: 1; padding: 8px 12px; font-size: 15px; border: 1px solid #ddd; border-radius: 8px; }
+  button { padding: 10px 20px; background: #7c3aed; color: white; border: none; border-radius: 8px; font-size: 15px; cursor: pointer; margin-top: 10px; }
+  #result { margin-top: 20px; padding: 16px; background: white; border-radius: 8px; border: 1px solid #ddd; display: none; }
+  .task-item { padding: 6px 0; border-bottom: 1px solid #eee; }
+</style>
+</head>
+<body>
+  <h1>📅 Планировщик недели</h1>
+  <p>Введи главную задачу на каждый день</p>
+  <div class="day-row"><span class="day-label">Понедельник</span><input type="text" id="mon" placeholder="Главная задача..."></div>
+  <div class="day-row"><span class="day-label">Вторник</span><input type="text" id="tue" placeholder="Главная задача..."></div>
+  <div class="day-row"><span class="day-label">Среда</span><input type="text" id="wed" placeholder="Главная задача..."></div>
+  <div class="day-row"><span class="day-label">Четверг</span><input type="text" id="thu" placeholder="Главная задача..."></div>
+  <div class="day-row"><span class="day-label">Пятница</span><input type="text" id="fri" placeholder="Главная задача..."></div>
+  <button onclick="buildPlan()">Составить план</button>
+  <div id="result"></div>
+  <script>
+    const days = [
+      { id: 'mon', name: 'Понедельник' },
+      { id: 'tue', name: 'Вторник' },
+      { id: 'wed', name: 'Среда' },
+      { id: 'thu', name: 'Четверг' },
+      { id: 'fri', name: 'Пятница' },
+    ];
+    function buildPlan() {
+      // ОШИБКА: getElementsByName ищет по атрибуту name, у полей нет name — нужно getElementById
+      const tasks = days.map(d => ({
+        day: d.name,
+        task: (document.getElementsByName(d.id)[0] || {}).value || ''
+      })).filter(t => t.task.trim() !== '');
+      if (tasks.length === 0) { alert('Введи хотя бы одну задачу!'); return; }
+      const result = document.getElementById('result');
+      result.innerHTML = '<strong>Твой план на неделю:</strong><br><br>' +
+        tasks.map(t => `<div class="task-item">📌 <b>${t.day}:</b> ${t.task}</div>`).join('');
+      result.style.display = 'block';
+    }
+  </script>
+</body>
+</html>
