@@ -1,10 +1,13 @@
 # Урок 5 — RAG, API-продукты, безопасность
 
-## Теория
+## Теория и презентация
 
-**`theory.md`** — глава 4. Читай до встречи.
+| Файл | Зачем |
+|------|--------|
+| **`slides.html`** | Презентация на созвон |
+| **`theory.md`** | Полная глава 4 |
 
-Темы: RAG (чанки, эмбеддинги), выбор модели, OpenRouter, Telegram-бот, streaming, image API, injection, golden tests, TDD.
+Темы: RAG, pgvector, JSON mode, боты, security, OWASP, логи, кэш, fallback.
 
 ## Практика
 
