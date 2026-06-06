@@ -9,13 +9,15 @@
 
 Темы: агенты, ReAct, MCP, скиллы, Perplexity, Parallel, пайплайны, права агента.
 
+**Perplexity + Parallel (расширенная глава):** `docs/research-apis.md` · скрипты: `examples/research/`
+
 ## Практика
 
 | Файл | Зачем |
 |------|--------|
 | `whattodoo.md` | Задания на созвоне |
 | `homework.md` | Домашка |
-| `brief-template.md` | Описание проекта (опционально) |
+| `project-template.md` | Описание проекта для агента |
 | `ideas-fallback.md` | Идеи, если застрял |
 
 ## Результат

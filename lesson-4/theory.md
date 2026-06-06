@@ -48,7 +48,7 @@
 **Агент (ReAct — Reason + Act):**
 ```
 Ты → задача
-  → «надо прочитать brief.md»     → читает файл
+  → «надо прочитать project.md»   → читает файл
   → «тут нет API ключа»           → просит .env
   → «запущу скрипт»               → терминал
   → «тест упал»                   → правит код
@@ -189,64 +189,86 @@ HTML + JS, Supabase, OpenRouter
 
 Модель **не знает** свежие новости и **выдумывает** ссылки. Для фактов из сети — **поисковый API**.
 
+📖 **Полная глава (все API Parallel, живые примеры, скрипты):** [`docs/research-apis.md`](../docs/research-apis.md)  
+▶️ **Запуск:** [`examples/research/`](../examples/research/)
+
 ### Perplexity API
 
-**Зачем:** ответ с **источниками**, меньше галлюцинаций на фактах.
+**Зачем:** готовый **синтез** ответа + массив `citations` (URL).
 
-**Когда:** «что изменилось в законе», «какие есть аналоги сервиса», быстрый ресёрч.
+**Когда:** «что такое MCP», «что изменилось в API», быстрый ресёрч на 30 секунд.
 
 **Паттерн:**
 ```
-1. Запрос → Perplexity API
-2. Ответ + citations (URL)
-3. Ты или агент проверяешь ссылки
-4. Итог в research.md
+1. POST /chat/completions (model: sonar)
+2. choices[0].message.content + citations[]
+3. Сохранить в research.md (текст + список URL)
+4. Агент пишет финал только с опорой на research.md
 ```
 
-Ключ: `PERPLEXITY_API_KEY` в `.env`.  
-Документация: [docs.perplexity.ai](https://docs.perplexity.ai)
-
-**Пример (идея, не копируй ключи в код репо):**
-```python
-# scripts/ask_perplexity.py — ключ из os.environ
-# «Какие MCP-серверы популярны для Notion в 2026?»
-# → сохранить ответ + список URL в research/mcp-notion.md
+**Реальный фрагмент ответа** (проверено на API курса):
+```json
+{
+  "choices": [{"message": {"content": "MCP — open-source стандарт…"}}],
+  "citations": [
+    "https://www.anthropic.com/news/model-context-protocol",
+    "https://en.wikipedia.org/wiki/Model_Context_Protocol"
+  ],
+  "usage": {"cost": {"total_cost": 0.00512}}
+}
 ```
 
-### Parallel API
+Скрипт: `examples/research/ask_perplexity.py`. Ключ: `PERPLEXITY_API_KEY` в `.env`.
 
-**Зачем:** поиск и обогащение данных **для агентов** — выдержки со страниц, структурированный ресёрч.
+### Parallel API — семейство, не один endpoint
 
-| API | Что делает |
-|-----|------------|
-| **Search** | «Найди всё про X» → отрывки с URL |
-| **Task** | Вход (таблица, компания) → структурированный JSON на выходе |
+| API | Что делает | Латентность |
+|-----|------------|-------------|
+| **Search** | objective + keywords → `results[].excerpts` | секунды |
+| **Extract** | URL → текст страницы | секунды |
+| **Task** | ресёрч + `output.basis[]` (citations, confidence) | сек–часы |
+| **Entity Search** | люди/компании | секунды |
+| **FindAll / Monitor** | датасеты, вебхуки при изменениях | фон |
 
-Ключ: `PARALLEL_API_KEY` в `.env`.  
-Документация: [docs.parallel.ai](https://docs.parallel.ai)
-
-**Search — пример запроса (curl):**
-```bash
-curl https://api.parallel.ai/v1/search \
-  -H "Content-Type: application/json" \
-  -H "x-api-key: $PARALLEL_API_KEY" \
-  -d '{
-    "objective": "Найти свежие статьи про RAG для маленьких команд",
-    "search_queries": ["RAG small team 2026", "vector database tutorial"]
-  }'
+**Search — реальный ответ** (сокращённо):
+```json
+{
+  "search_id": "search_2fe33c3f6303405997afdf1f673de06d",
+  "results": [{
+    "url": "https://encore.dev/blog/you-probably-dont-need-a-vector-database",
+    "title": "pgvector Guide: Vector Search and RAG in PostgreSQL",
+    "excerpts": ["pgvector is a PostgreSQL extension that adds vector storage..."]
+  }]
+}
 ```
 
-**Task — идея:** на входе `{ "company": "Notion" }`, на выходе JSON с полями по твоей схеме.
+**Task — реальный ответ** (`processor: lite`, ~40 с):
+```json
+{
+  "output": {
+    "type": "json",
+    "content": {"what_is": "Claude Code is Anthropic's terminal-based...", "key_features": ["..."]},
+    "basis": [{
+      "field": "what_is",
+      "confidence": "high",
+      "citations": [{"url": "https://code.claude.com/docs/en/overview", "title": "..."}]
+    }]
+  }
+}
+```
 
-**В Claude Code:** Parallel можно подключить как MCP (`parallel-web`) — агент сам вызывает поиск.
+Скрипты: `parallel_search.py`, `parallel_task.py`, `parallel_extract.py`, `research_router.py`.
+
+**В Claude Code:** Parallel MCP (`parallel-web`) — агент вызывает Search без скрипта.
 
 ### Когда что
 
 | Задача | Инструмент |
 |--------|------------|
-| Быстрый ответ с ссылками | Perplexity |
-| Много страниц, выдержки для RAG | Parallel Search |
-| Таблица → дополнить колонками из сети | Parallel Task |
+| Быстрый ответ-эссе с ссылками | Perplexity |
+| Выдержки 5–20 страниц для RAG | Parallel Search |
+| Известный URL → текст | Parallel Extract |
+| JSON-поля по компании/теме | Parallel Task |
 | Код в твоём проекте | Агент + файлы |
 | Точные цифры по твоим данным | Python-скрипт (урок 3) |
 
@@ -353,45 +375,60 @@ claude mcp add notion
 
 ## 3.14 Perplexity API — подробнее
 
-**Модели (примеры):** `sonar`, `sonar-pro` — с доступом в интернет.
+См. также §3.8 и [`docs/research-apis.md`](../docs/research-apis.md) §3.
 
-**Запрос (идея):**
-```bash
-curl https://api.perplexity.ai/chat/completions \
-  -H "Authorization: Bearer $PERPLEXITY_API_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "model": "sonar",
-    "messages": [{"role": "user", "content": "Что нового в MCP в 2026?"}]
-  }'
+**Модели:** `sonar` (быстро), `sonar-pro` (глубже). Список — в docs.perplexity.ai.
+
+**Поля ответа, которые должен знать инженер:**
+
+| Поле | Зачем |
+|------|--------|
+| `choices[0].message.content` | Текст для пользователя |
+| `citations[]` | URL для проверки |
+| `usage.cost.total_cost` | Бюджет демо/бота |
+| `search_results[]` | (если есть) сниппеты до синтеза |
+
+**Антипаттерн:** скопировать ответ в промпт без citations → через неделю не вспомнишь источник.
+
+**Промпт для агента:**
 ```
-
-В ответе — `citations` с URL. **Всегда сохраняй источники** в `research.md`.
-
-**Когда НЕ Perplexity:** твои внутренние доки → RAG. Твои цифры → скрипт.
+Вызови ask_perplexity.py с вопросом «…».
+Сохрани ответ и citations в research/YYYY-MM-DD-topic.md.
+Напиши вывод в 5 буллетах — каждый с [источник](url).
+```
 
 ---
 
 ## 3.15 Parallel API — подробнее
 
-### Search API
-Вход: `objective` (что ищем) + `search_queries` (ключевые запросы).  
-Выход: `results[]` с `url`, `title`, `excerpts[]`.
+См. [`docs/research-apis.md`](../docs/research-apis.md) §4–7.
 
-**Агенту:** «Возьми excerpts → положи в `sources.md` → ответь только по ним».
+### Search
+- Вход: `objective` + `search_queries` (2–3 keyword — лучше recall).
+- Выход: `search_id`, `results[]` → `url`, `title`, `publish_date`, `excerpts[]`.
+- **Grounding:** «Ответь только по excerpts в sources.md».
 
-### Task API
-Вход: JSON (например компания) + `output_schema` (какие поля нужны).  
-Выход: структурированный JSON с citations.
+### Extract
+- Вход: `urls[]`, опционально `objective`.
+- Endpoint: `POST /v1beta/extract`.
+- Когда: ссылка уже есть (из Search или от пользователя).
 
-**Кейс:** CSV из 50 компаний → дополнить колонку «сайт», «ниша» — Task в цикле или batch.
+### Task
+- `POST /v1/tasks/runs` → `run_id`, `status: queued`.
+- Poll: `GET /v1/tasks/runs/{run_id}/result` до `completed`.
+- **Processors:** `lite` (курс, секунды), `base`/`core`, `pro`/`ultra` (минуты–часы, webhook).
+- **basis[]** — золото: `field`, `citations`, `reasoning`, `confidence`.
+
+**Кейс:** CSV компаний → Task с `output_schema` JSON → `merged.csv`.
 
 ### Parallel в Claude Code
 ```bash
-# через marketplace skills (см. docs.parallel.ai)
 /plugin marketplace add parallel-web/parallel-agent-skills
 /parallel:setup
 ```
+
+### Комбо (домашка)
+`research_router.py` — один вопрос → Perplexity + Parallel Search в один `.md`.
 
 ---
 

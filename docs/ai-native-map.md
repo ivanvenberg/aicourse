@@ -30,3 +30,10 @@ lesson-6/theory.md  →  глава 5
 ## API-ключи
 
 Шаблон: `docs/env.example` — только в `.env`, не в git.
+
+## Perplexity + Parallel (полная глава)
+
+| Файл | Содержание |
+|------|------------|
+| `docs/research-apis.md` | Вся теория: Search, Extract, Task, Entity, Monitor, примеры ответов API |
+| `examples/research/` | Рабочие скрипты: search, task, extract, perplexity, router |

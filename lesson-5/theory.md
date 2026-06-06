@@ -360,17 +360,47 @@ Redeploy после смены env.
 
 ---
 
-## 4.22 Perplexity + RAG вместе
+## 4.22 Perplexity + Parallel + RAG вместе
 
-**Схема:**
+📖 Полная теория: [`docs/research-apis.md`](../docs/research-apis.md)  
+▶️ Скрипт-комбо: [`examples/research/research_router.py`](../examples/research/research_router.py)
+
+**Три источника правды — три инструмента:**
+
+| Источник | Инструмент | Что кладём в контекст |
+|----------|------------|------------------------|
+| Интернет, синтез | Perplexity `sonar` | `content` + `citations[]` |
+| Интернет, сырые куски | Parallel Search | `results[].excerpts` → чанки |
+| Наши файлы | RAG / pgvector | top-k чанков из `knowledge/` |
+
+**Схема роутера:**
 ```
 Вопрос пользователя
-  → нужны свежие факты? → Perplexity API (citations)
-  → нужны внутренние доки? → RAG по knowledge/
-  → собрать контекст → основная модель → ответ
+  ├─ classifier (правило или маленький промпт)
+  │     ├─ «свежее / внешнее» → Perplexity ИЛИ Parallel Search
+  │     └─ «наше / регламент» → RAG
+  ├─ Собрать context с метками:
+  │     [WEB-PPLX] … [WEB-PAR] … [INTERNAL] …
+  └─ Основная модель (OpenRouter) → ответ + ссылки
 ```
 
-Не смешивай «наш регламент» и «новости из сети» в одной куче без пометок.
+**Почему метки:** модель не должна смешивать «так написано в нашем Notion» и «так пишут в блоге».
+
+**Минимальный код (идея):**
+```python
+# 1. Perplexity — черновик фактов
+# 2. Parallel Search — excerpts в sources.md
+# 3. RAG — similarity по knowledge/
+# 4. system: «Используй только блоки ниже. Если нет данных — скажи.»
+
+context = f"[WEB]\n{pplx_text}\n\n[SOURCES]\n{excerpts}\n\n[INTERNAL]\n{rag_chunks}"
+```
+
+**Search → RAG:** `excerpts` нарезать 500–800 токенов → embeddings → pgvector (§4.2–4.4). На прототипе хватит одного `sources.md` без векторизации.
+
+**Стоимость:** Perplexity отдаёт `usage.cost`; Parallel — смотри dashboard; RAG — embeddings + хранение.
+
+**Тест:** golden-вопрос «Что в нашем регламенте про X?» — ответ только из [INTERNAL], не из [WEB].
 
 ---
 

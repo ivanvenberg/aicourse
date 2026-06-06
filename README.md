@@ -16,11 +16,11 @@
 | 1 | `lesson-1/` | Сайт, деплой, git |
 | 2 | `lesson-2/` | AI + первый продукт |
 | 3 | `lesson-3/` | База данных + скрипты |
-| 4 | `lesson-4/` | **Свой продаваемый продукт** + агенты, MCP, скиллы |
-| 5 | `lesson-5/` | Бот / RAG / безопасность |
+| 4 | `lesson-4/` | Агенты, MCP, скиллы, Perplexity, Parallel |
+| 5 | `lesson-5/` | RAG, боты, Perplexity+Parallel+RAG, безопасность |
 | 6 | `lesson-6/` | Демо-день |
 
-Уроки 4–6: путь к **AI-native** — агенты, MCP, RAG, API, безопасность. Карта: `docs/ai-native-map.md`. В папке: `theory.md` → `whattodoo.md` → `homework.md`.
+Уроки 4–6: путь к **AI-native** — агенты, MCP, RAG, API, безопасность. Карта: `docs/ai-native-map.md`. Perplexity + Parallel (полная глава): `docs/research-apis.md`, скрипты: `examples/research/`. В папке урока: `theory.md` → `whattodoo.md` → `homework.md`.
 
 ---
 
