@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Урок 5 — RAG и API</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; background: #0a0f0a; color: #eee; }
+    .slide {
+      min-height: 100vh; padding: 48px 64px;
+      display: none; flex-direction: column; justify-content: center;
+      max-width: 900px; margin: 0 auto;
+    }
+    .slide.active { display: flex; }
+    h1 { font-size: 2.4rem; margin-bottom: 0.5rem; color: #86efac; }
+    h2 { font-size: 1.4rem; margin: 1.2rem 0 0.6rem; color: #6ee7b7; }
+    p, li { font-size: 1.2rem; line-height: 1.55; margin: 0.35rem 0; }
+    ul { margin-left: 1.5rem; }
+    pre { background: #141a14; padding: 14px; border-radius: 6px; font-size: 0.9rem; margin: 10px 0; white-space: pre-wrap; }
+    code { background: #141a14; padding: 2px 6px; border-radius: 4px; }
+    table { border-collapse: collapse; margin: 10px 0; font-size: 1rem; width: 100%; }
+    td, th { border: 1px solid #2a3a2a; padding: 8px; }
+    th { background: #1a241a; }
+    .meta { color: #888; font-size: 0.95rem; }
+    .tag { background: #14532d; color: #86efac; padding: 4px 12px; border-radius: 99px; font-size: 0.85rem; margin-bottom: 1rem; display: inline-block; }
+    .nav { position: fixed; bottom: 24px; right: 24px; color: #555; }
+  </style>
+</head>
+<body>
+
+<section class="slide active">
+  <span class="tag">Урок 5</span>
+  <h1>RAG, модели, прод</h1>
+  <p class="meta">Глава 4 · theory.md</p>
+  <p>AI <strong>снаружи</strong>: бот, API, картинки. Безопасно.</p>
+</section>
+
+<section class="slide">
+  <h1>3 способа «научить» модель</h1>
+  <table>
+    <tr><th>Способ</th><th>Когда</th></tr>
+    <tr><td>Длинный контекст</td><td>Мало текста</td></tr>
+    <tr><td>RAG</td><td>Много доков, обновления</td></tr>
+    <tr><td>Fine-tuning</td><td>Тысячи примеров стиля (редко)</td></tr>
+  </table>
+</section>
+
+<section class="slide">
+  <h1>RAG — 7 шагов</h1>
+  <pre>Доки → чанки → эмбеддинги → хранилище
+Вопрос → эмбеддинг → top-3 чанка
+Чанки + вопрос → модель → ответ</pre>
+  <p>Старт: один <code>knowledge.md</code> + «не знаю»</p>
+</section>
+
+<section class="slide">
+  <h1>Почему RAG ломается</h1>
+  <ul>
+    <li>Плохой чанкинг → overlap 50 слов</li>
+    <li>Устаревшие данные → даты в metadata</li>
+    <li>Слишком много чанков → top-3 + rerank</li>
+    <li>Нет «не знаю» → галлюцинации</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h1>Эмбеддинги + pgvector</h1>
+  <p>Текст → вектор ~1536 чисел</p>
+  <p>Похожий смысл → близкие векторы</p>
+  <p>Supabase <code>pgvector</code> — для продакшн-RAG</p>
+</section>
+
+<section class="slide">
+  <h1>Выбор модели</h1>
+  <table>
+    <tr><th>Задача</th><th>Модель</th></tr>
+    <tr><td>Бот, FAQ</td><td>Gemini Flash</td></tr>
+    <tr><td>Код, текст</td><td>Claude Sonnet</td></tr>
+    <tr><td>Сложная логика</td><td>Opus / o1 (редко)</td></tr>
+  </table>
+  <p>OpenRouter — один ключ, смена в одной строке</p>
+</section>
+
+<section class="slide">
+  <h1>Поток запроса</h1>
+  <pre>Пользователь → твой сервер
+  → RAG (опционально)
+  → OpenRouter API
+  → ответ пользователю</pre>
+  <p>Ключи в <code>.env</code></p>
+</section>
+
+<section class="slide">
+  <h1>Telegram-бот</h1>
+  <p>@BotFather → токен → <code>bot.py</code></p>
+  <table>
+    <tr><th>Polling</th><th>Webhook</th></tr>
+    <tr><td>Локально, просто</td><td>Прод 24/7</td></tr>
+  </table>
+</section>
+
+<section class="slide">
+  <h1>Streaming</h1>
+  <p><code>"stream": true</code> — ответ по кускам</p>
+  <p>UX как ChatGPT. В Telegram — буфер → одно сообщение.</p>
+</section>
+
+<section class="slide">
+  <h1>JSON mode</h1>
+  <p>Ответ строго по схеме:</p>
+  <pre>{"title": "...", "score": 0.9}</pre>
+  <p>Валидируй в коде — модель иногда ошибается</p>
+</section>
+
+<section class="slide">
+  <h1>Безопасность</h1>
+  <ul>
+    <li><strong>Injection</strong> — границы в system prompt</li>
+    <li>Ключи только в .env</li>
+    <li>Rate limit на user_id</li>
+    <li>Без человека: удаление, платежи, рассылки</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h1>Golden tests</h1>
+  <p><code>tests/ai-golden.md</code></p>
+  <ul>
+    <li>10 вопросов с эталонными ответами</li>
+    <li>5 вопросов вне базы → «не знаю»</li>
+    <li>3 injection-атаки</li>
+  </ul>
+  <p>После каждого изменения промпта</p>
+</section>
+
+<section class="slide">
+  <h1>Perplexity + RAG</h1>
+  <pre>Свежие факты → Perplexity (citations)
+Внутренние правила → RAG
+Собрать → основная модель → ответ</pre>
+  <p>Не смешивать без пометок</p>
+</section>
+
+<section class="slide">
+  <h1>Кэш и fallback</h1>
+  <p><strong>Кэш:</strong> FAQ, повторяющийся system prompt</p>
+  <p><strong>Fallback:</strong> Flash → ошибка → Sonnet</p>
+  <p><strong>Логи:</strong> модель, токены, latency (без PII)</p>
+</section>
+
+<section class="slide">
+  <h1>Практика сегодня</h1>
+  <ul>
+    <li>RAG: knowledge.md или чанки</li>
+    <li>Бот или AI-фича в вебе</li>
+    <li>.env + golden tests</li>
+    <li>«Пытки» — injection, оффтоп</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h1>Урок 6</h1>
+  <p>AI-native профессионал · демо</p>
+  <p class="meta">lesson-6/slides.html</p>
+</section>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  let i = 0;
+  function show(n) {
+    slides[i].classList.remove('active');
+    i = (n + slides.length) % slides.length;
+    slides[i].classList.add('active');
+    document.querySelector('.nav').textContent = (i+1) + ' / ' + slides.length;
+  }
+  document.body.insertAdjacentHTML('beforeend', '<div class="nav">1 / ' + slides.length + '</div>');
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); show(i+1); }
+    if (e.key === 'ArrowLeft') show(i-1);
+  });
+  document.addEventListener('click', e => { if (e.clientX > innerWidth/2) show(i+1); else show(i-1); });
+</script>
+</body>
+</html>

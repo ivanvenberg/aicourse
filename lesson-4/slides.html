@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Урок 4 — Агенты</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; background: #0f0f12; color: #eee; }
+    .slide {
+      min-height: 100vh; padding: 48px 64px;
+      display: none; flex-direction: column; justify-content: center;
+      max-width: 900px; margin: 0 auto;
+    }
+    .slide.active { display: flex; }
+    h1 { font-size: 2.4rem; margin-bottom: 0.5rem; color: #7dd3fc; }
+    h2 { font-size: 1.5rem; margin: 1.5rem 0 0.75rem; color: #a5b4fc; }
+    p, li { font-size: 1.25rem; line-height: 1.6; margin: 0.4rem 0; }
+    ul { margin-left: 1.5rem; }
+    code, pre { background: #1e1e28; padding: 2px 8px; border-radius: 4px; font-size: 0.95rem; }
+    pre { padding: 16px; overflow-x: auto; margin: 12px 0; white-space: pre-wrap; }
+    table { border-collapse: collapse; margin: 12px 0; font-size: 1.1rem; }
+    td, th { border: 1px solid #333; padding: 8px 12px; text-align: left; }
+    th { background: #1a1a24; }
+    .meta { color: #888; font-size: 1rem; margin-bottom: 2rem; }
+    .nav { position: fixed; bottom: 24px; right: 24px; color: #666; font-size: 0.9rem; }
+    .tag { display: inline-block; background: #312e81; color: #c4b5fd; padding: 4px 12px; border-radius: 99px; font-size: 0.85rem; margin-bottom: 1rem; }
+  </style>
+</head>
+<body>
+
+<section class="slide active">
+  <span class="tag">Урок 4</span>
+  <h1>Агенты: от чата к системе</h1>
+  <p class="meta">Глава 3 · theory.md</p>
+  <p>AI не только отвечает — <strong>делает</strong>: файлы, терминал, сервисы, интернет.</p>
+  <p class="meta">← → или пробел для слайдов</p>
+</section>
+
+<section class="slide">
+  <h1>4 уровня работы с AI</h1>
+  <ul>
+    <li><strong>1. Чат</strong> — копируешь сам</li>
+    <li><strong>2. Редактор</strong> — Cursor правит файлы</li>
+    <li><strong>3. Субагент</strong> — подзадача, отчёт тебе</li>
+    <li><strong>4. MCP</strong> — руки в Notion, Sheets, поиске</li>
+  </ul>
+  <p><strong>AI-native</strong> = уровни 2–4</p>
+</section>
+
+<section class="slide">
+  <h1>ReAct</h1>
+  <pre>Думаю → Действую → Смотрю результат → снова</pre>
+  <p>Не фантазия — каждый шаг по <strong>реальному</strong> выводу терминала/файла.</p>
+  <h2>Пример</h2>
+  <p>«Прочитай data.json → напиши скрипт → запусти → сохрани в results/»</p>
+</section>
+
+<section class="slide">
+  <h1>Субагенты</h1>
+  <p>Параллельно, независимо:</p>
+  <pre>1. Аудит API вызовов → audit/api.md
+2. Аудит безопасности → audit/sec.md
+3. Идеи архитектуры → audit/ideas.md
+→ summary.md</pre>
+  <p>≠ «сыграй трёх экспертов» в одном чате</p>
+</section>
+
+<section class="slide">
+  <h1>Tool use</h1>
+  <p>Модель вызывает <strong>функции</strong>: Read, Write, Bash, Grep…</p>
+  <p>MCP добавляет tools внешних сервисов.</p>
+  <p>Ты решаешь: что <strong>разрешено</strong> и что <strong>запрещено</strong>.</p>
+</section>
+
+<section class="slide">
+  <h1>MCP</h1>
+  <table>
+    <tr><th>Команда</th><th>Сервис</th></tr>
+    <tr><td>claude mcp add notion</td><td>Notion</td></tr>
+    <tr><td>claude mcp add gsheets</td><td>Google Sheets</td></tr>
+    <tr><td>claude mcp add figma</td><td>Figma</td></tr>
+  </table>
+  <p>Токен — OAuth, не в чат</p>
+</section>
+
+<section class="slide">
+  <h1>Скиллы</h1>
+  <p><code>.claude/skills/имя/skill.md</code></p>
+  <p>Вызов: <code>/weekly-report</code></p>
+  <p>= твой рабочий процесс в тексте</p>
+</section>
+
+<section class="slide">
+  <h1>Память проекта</h1>
+  <table>
+    <tr><th>Файл</th><th>Содержание</th></tr>
+    <tr><td>CLAUDE.md</td><td>Стек, правила кода</td></tr>
+    <tr><td>MEMORY.md</td><td>Ты, проект, тон</td></tr>
+    <tr><td>AGENTS.md</td><td>MAY / MAY NOT</td></tr>
+    <tr><td>.env</td><td>Ключи — не в git!</td></tr>
+  </table>
+</section>
+
+<section class="slide">
+  <h1>Perplexity API</h1>
+  <p>Факты из сети + <strong>citations (URL)</strong></p>
+  <p><code>PERPLEXITY_API_KEY</code> в .env</p>
+  <p>Когда: свежие новости, аналоги, законы</p>
+  <p>Не когда: твои внутренние доки → RAG</p>
+</section>
+
+<section class="slide">
+  <h1>Parallel API</h1>
+  <table>
+    <tr><th>API</th><th>Зачем</th></tr>
+    <tr><td>Search</td><td>Выдержки со страниц для агента</td></tr>
+    <tr><td>Task</td><td>Таблица → JSON из сети</td></tr>
+  </table>
+  <p><code>PARALLEL_API_KEY</code> · MCP <code>parallel-web</code></p>
+</section>
+
+<section class="slide">
+  <h1>Когда что</h1>
+  <table>
+    <tr><th>Задача</th><th>Инструмент</th></tr>
+    <tr><td>Точные цифры</td><td>Python-скрипт</td></tr>
+    <tr><td>Свои доки</td><td>RAG</td></tr>
+    <tr><td>Факты из сети</td><td>Perplexity / Parallel</td></tr>
+    <tr><td>Код, файлы</td><td>Агент в Cursor</td></tr>
+  </table>
+</section>
+
+<section class="slide">
+  <h1>Plan vs ReAct</h1>
+  <p><strong>Plan-and-Execute</strong> — план на 5 шагов, потом выполнение</p>
+  <p><strong>ReAct</strong> — шаг за шагом, гибко</p>
+  <p>Большой проект → план. Отладка → ReAct.</p>
+</section>
+
+<section class="slide">
+  <h1>3 ловушки</h1>
+  <table>
+    <tr><th>Ловушка</th><th>Защита</th></tr>
+    <tr><td>Дети — отключил тесты</td><td>Сколько тестов было?</td></tr>
+    <tr><td>Кексы — хардкод</td><td>Читай код</td></tr>
+    <tr><td>Мусор — debug логи</td><td>«Убери после задачи»</td></tr>
+  </table>
+  <p><strong>git commit</strong> перед большой правкой</p>
+</section>
+
+<section class="slide">
+  <h1>Пайплайн</h1>
+  <pre>/find-news → news.md
+/draft      → post.md
+Ты          → правка 5 мин
+Публикация</pre>
+  <p>Скиллы = звенья цепочки</p>
+</section>
+
+<section class="slide">
+  <h1>Практика сегодня</h1>
+  <ul>
+    <li>Один скилл <code>/команда</code></li>
+    <li>Один MCP или Perplexity/Parallel скрипт</li>
+    <li>CLAUDE.md + MEMORY.md</li>
+    <li>Реальная задача в проекте</li>
+  </ul>
+  <p class="meta">whattodoo.md · homework.md</p>
+</section>
+
+<section class="slide">
+  <h1>Урок 5</h1>
+  <p>RAG · боты · безопасность · прод</p>
+  <p class="meta">lesson-5/slides.html</p>
+</section>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  let i = 0;
+  function show(n) {
+    slides[i].classList.remove('active');
+    i = (n + slides.length) % slides.length;
+    slides[i].classList.add('active');
+    document.querySelector('.nav').textContent = (i+1) + ' / ' + slides.length;
+  }
+  document.body.insertAdjacentHTML('beforeend', '<div class="nav">1 / ' + slides.length + '</div>');
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); show(i+1); }
+    if (e.key === 'ArrowLeft') show(i-1);
+  });
+  document.addEventListener('click', e => { if (e.clientX > innerWidth/2) show(i+1); else show(i-1); });
+</script>
+</body>
+</html>

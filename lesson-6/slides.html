@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Урок 6 — AI-native</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: system-ui, sans-serif; background: #0f0a14; color: #eee; }
+    .slide {
+      min-height: 100vh; padding: 48px 64px;
+      display: none; flex-direction: column; justify-content: center;
+      max-width: 900px; margin: 0 auto;
+    }
+    .slide.active { display: flex; }
+    h1 { font-size: 2.4rem; margin-bottom: 0.5rem; color: #e9d5ff; }
+    h2 { font-size: 1.35rem; margin: 1rem 0 0.5rem; color: #d8b4fe; }
+    p, li { font-size: 1.2rem; line-height: 1.55; margin: 0.35rem 0; }
+    ul { margin-left: 1.5rem; }
+    pre { background: #1a1420; padding: 12px; border-radius: 6px; font-size: 0.85rem; white-space: pre-wrap; }
+    table { border-collapse: collapse; margin: 10px 0; font-size: 1rem; width: 100%; }
+    td, th { border: 1px solid #3a2a4a; padding: 8px; }
+    th { background: #241a30; }
+    .meta { color: #888; }
+    .tag { background: #581c87; color: #e9d5ff; padding: 4px 12px; border-radius: 99px; font-size: 0.85rem; margin-bottom: 1rem; display: inline-block; }
+    .nav { position: fixed; bottom: 24px; right: 24px; color: #555; }
+    .check { color: #a78bfa; }
+  </style>
+</head>
+<body>
+
+<section class="slide active">
+  <span class="tag">Урок 6 · Финал</span>
+  <h1>AI-native профессионал</h1>
+  <p class="meta">Глава 5 · theory.md</p>
+  <p>Жить с AI-кодом: контроль, деньги, процесс, демо.</p>
+</section>
+
+<section class="slide">
+  <h1>AI-native — это</h1>
+  <ul>
+    <li>Задачи под агента + декомпозиция</li>
+    <li>Скрипт / RAG / Perplexity — когда что</li>
+    <li>.env, git, ревью diff</li>
+    <li>Golden tests, скиллы, MCP</li>
+    <li>Принял код = <strong>твой</strong> код</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h1>Карта стека</h1>
+  <pre>ТЫ (задача, ревью, этика)
+  ↓
+Cursor + скиллы + CLAUDE.md
+  ↓
+MCP · субагенты · скрипты
+  ↓
+OpenRouter · Perplexity · Parallel
+  ↓
+Supabase · Telegram · Vercel</pre>
+</section>
+
+<section class="slide">
+  <h1>Git = страховка</h1>
+  <pre>git commit -m "chore: перед большой правкой"
+# агент работает...
+# сломалось → git reset --hard HEAD</pre>
+  <p>Семантика: feat / fix / refactor / docs</p>
+</section>
+
+<section class="slide">
+  <h1>Code review AI-кода</h1>
+  <ol>
+    <li>«Объясни как непрограммисту»</li>
+    <li>«Ты злой ревьюер»</li>
+    <li>Чеклист: .env, пустой ввод, логи</li>
+    <li>Смотри diff — много красного = стоп</li>
+  </ol>
+</section>
+
+<section class="slide">
+  <h1>Техдолг</h1>
+  <p>Вайбкодинг быстрый → мусор быстрый</p>
+  <p>После фичи: дубли, debug, функции &gt; 30 строк</p>
+  <p><code>TECH-DEBT.md</code> — что отложили</p>
+</section>
+
+<section class="slide">
+  <h1>Human-in-the-loop</h1>
+  <table>
+    <tr><th>AI</th><th>Ты</th></tr>
+    <tr><td>Черновик</td><td>Финал клиенту</td></tr>
+    <tr><td>Код</td><td>Auth, деньги, PII</td></tr>
+    <tr><td>Идеи</td><td>Решение</td></tr>
+  </table>
+</section>
+
+<section class="slide">
+  <h1>Стоимость</h1>
+  <pre>Счёт ≈ токены × цена × пользователи</pre>
+  <ul>
+    <li>Flash для рутины</li>
+    <li>RAG top-3, не top-20</li>
+    <li>Кэш FAQ</li>
+    <li>Rate limit</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h1>PROMPTS.md</h1>
+  <p>Версии системных промптов в git</p>
+  <p>v3: добавили «не знаю»</p>
+  <p>v2: FAQ ушёл в RAG</p>
+  <p>→ видно что сломало golden tests</p>
+</section>
+
+<section class="slide">
+  <h1>Инциденты</h1>
+  <ol>
+    <li>Выключи бота</li>
+    <li>Логи</li>
+    <li>Фикс промпта/RAG</li>
+    <li>Golden tests</li>
+    <li>Включи · запиши в INCIDENTS.md</li>
+  </ol>
+</section>
+
+<section class="slide">
+  <h1>Приватность</h1>
+  <ul>
+    <li>Не слать PII в API</li>
+    <li>Логи без персональных данных</li>
+    <li>Право на удаление в БД</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h1>Демо 5 минут</h1>
+  <table>
+    <tr><th>Время</th><th>Блок</th></tr>
+    <tr><td>0:30</td><td>Какую проблему решает</td></tr>
+    <tr><td>2:00</td><td>Живое демо</td></tr>
+    <tr><td>1:00</td><td>Что узнал</td></tr>
+    <tr><td>0:30</td><td>Шаг на месяц</td></tr>
+  </table>
+</section>
+
+<section class="slide">
+  <h1>Чеклист AI-native</h1>
+  <ul>
+    <li class="check">□ Продукт с AI по ссылке</li>
+    <li class="check">□ RAG + «не знаю»</li>
+    <li class="check">□ .env + gitignore</li>
+    <li class="check">□ 3+ скилла или MCP</li>
+    <li class="check">□ Golden tests</li>
+    <li class="check">□ Perplexity или Parallel</li>
+    <li class="check">□ Объясню код простыми словами</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h1>6 уроков — путь</h1>
+  <table>
+    <tr><th>#</th><th>Тема</th></tr>
+    <tr><td>1</td><td>Веб, деплой</td></tr>
+    <tr><td>2</td><td>Модель, API</td></tr>
+    <tr><td>3</td><td>Промпты, БД, скрипты</td></tr>
+    <tr><td>4</td><td>Агенты, MCP</td></tr>
+    <tr><td>5</td><td>RAG, бот, security</td></tr>
+    <tr><td>6</td><td>Процесс, демо</td></tr>
+  </table>
+  <p class="meta">docs/ai-native-map.md</p>
+</section>
+
+<section class="slide">
+  <h1>Спасибо 🎉</h1>
+  <p>Дальше — углубление в <strong>свою</strong> профессию, не новые buzzwords.</p>
+</section>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  let i = 0;
+  function show(n) {
+    slides[i].classList.remove('active');
+    i = (n + slides.length) % slides.length;
+    slides[i].classList.add('active');
+    document.querySelector('.nav').textContent = (i+1) + ' / ' + slides.length;
+  }
+  document.body.insertAdjacentHTML('beforeend', '<div class="nav">1 / ' + slides.length + '</div>');
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); show(i+1); }
+    if (e.key === 'ArrowLeft') show(i-1);
+  });
+  document.addEventListener('click', e => { if (e.clientX > innerWidth/2) show(i+1); else show(i-1); });
+</script>
+</body>
+</html>

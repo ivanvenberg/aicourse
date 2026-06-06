@@ -12,9 +12,9 @@
 
 | Урок | Файл | Темы |
 |------|------|------|
-| 4 | `lesson-4/theory.md` | Агенты, ReAct, субагенты, MCP, скиллы, Perplexity, Parallel |
-| 5 | `lesson-5/theory.md` | RAG, модели, боты, streaming, безопасность, eval |
-| 6 | `lesson-6/theory.md` | Git, ревью, техдолг, стоимость, карта стека, чеклист |
+| 4 | `lesson-4/theory.md` + `slides.html` | Агенты, ReAct, MCP, скиллы, Perplexity, Parallel, пайплайны |
+| 5 | `lesson-5/theory.md` + `slides.html` | RAG, pgvector, JSON mode, боты, OWASP, eval, логи |
+| 6 | `lesson-6/theory.md` + `slides.html` | Git, ревью, PROMPTS.md, CI, инциденты, глоссарий, чеклист |
 
 ## Читать по порядку
 
