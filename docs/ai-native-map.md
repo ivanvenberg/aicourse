@@ -1,39 +1,47 @@
 # Карта курса: путь к AI-native
 
-## Уроки 1–3 (есть)
+## Уроки 1–3
 
 | Урок | Теория | Навык |
 |------|--------|--------|
 | 1 | Вайбкодинг, HTML/CSS/JS, деплой, git | Сайт по ссылке |
-| 2 | Модель, токены, API, Supabase, OpenRouter | Чат + AI |
+| 2 | Модель, токены, API, Supabase | Чат + `@ai` |
 | 3 | Промпты, скрипты, RAG вводно, БД | Точные цифры + память |
 
-## Уроки 4–6 (теория)
+## Уроки 4–6 — один проект, три встречи
 
-| Урок | Файл | Темы |
-|------|------|------|
-| 4 | `lesson-4/theory.md` + `slides.html` | Агенты, ReAct, MCP, скиллы, Perplexity, Parallel, пайплайны |
-| 5 | `lesson-5/theory.md` + `slides.html` | RAG, pgvector, JSON mode, боты, OWASP, eval, логи |
-| 6 | `lesson-6/theory.md` + `slides.html` | Git, ревью, PROMPTS.md, CI, инциденты, глоссарий, чеклист |
+| Встреча | Папка | На созвоне | Дома (теория) |
+|---------|--------|------------|----------------|
+| **1** | `lesson-4/` | `project.md` · агенты-челлендж · MVP | `theory.md` — агенты, MCP, скиллы |
+| **2** | `lesson-5/` | Доделка бот/app · faq · пытки | `theory.md` — RAG, безопасность |
+| **3** | `lesson-6/` | Презентация 5 мин · ревью | `theory.md` — git, процесс, чеклист |
 
-## Читать по порядку
+### Файлы на созвон
 
 ```
-lesson-1/theory.md  →  глава 0
-lesson-2/theory.md  →  глава 1
-lesson-3/theory.md  →  глава 2
-lesson-4/theory.md  →  глава 3
-lesson-5/theory.md  →  глава 4
-lesson-6/theory.md  →  глава 5
+lesson-N/slides.html   ← презентация в браузере
+lesson-N/whattodoo.md  ← план 90 мин
+lesson-N/homework.md   ← после встречи
 ```
 
-## API-ключи
+### Агенты-челлендж (встреча 1)
 
-Шаблон: `docs/env.example` — только в `.env`, не в git.
+Шаблоны: `lesson-4/agents-templates/` → копируй в `.claude/agents/`
 
-## Perplexity + Parallel (полная глава)
+| Агент | Роль |
+|-------|------|
+| `builder` | MVP за 3 встречи |
+| `skeptic` | что выкинуть |
+| `user-voice` | понял за 30 сек? |
+| → `verdict.md` | GO / PIVOT / KILL |
+
+## Perplexity + Parallel
 
 | Файл | Содержание |
 |------|------------|
-| `docs/research-apis.md` | Вся теория: Search, Extract, Task, Entity, Monitor, примеры ответов API |
-| `examples/research/` | Рабочие скрипты: search, task, extract, perplexity, router |
+| `docs/research-apis.md` | Полная глава |
+| `examples/research/` | Скрипты |
+
+## API-ключи
+
+Шаблон: `docs/env.example` → `.env` (не в git)

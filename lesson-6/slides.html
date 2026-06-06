@@ -3,178 +3,90 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Урок 6 — AI-native</title>
+  <title>Урок 6 — Демо</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: system-ui, sans-serif; background: #0f0a14; color: #eee; }
-    .slide {
-      min-height: 100vh; padding: 48px 64px;
-      display: none; flex-direction: column; justify-content: center;
-      max-width: 900px; margin: 0 auto;
-    }
+    .slide { min-height: 100vh; padding: 48px 64px; display: none; flex-direction: column; justify-content: center; max-width: 900px; margin: 0 auto; }
     .slide.active { display: flex; }
     h1 { font-size: 2.4rem; margin-bottom: 0.5rem; color: #e9d5ff; }
     h2 { font-size: 1.35rem; margin: 1rem 0 0.5rem; color: #d8b4fe; }
     p, li { font-size: 1.2rem; line-height: 1.55; margin: 0.35rem 0; }
-    ul { margin-left: 1.5rem; }
-    pre { background: #1a1420; padding: 12px; border-radius: 6px; font-size: 0.85rem; white-space: pre-wrap; }
+    ul, ol { margin-left: 1.5rem; }
+    pre { background: #1a1420; padding: 12px; border-radius: 6px; font-size: 0.9rem; white-space: pre-wrap; }
     table { border-collapse: collapse; margin: 10px 0; font-size: 1rem; width: 100%; }
     td, th { border: 1px solid #3a2a4a; padding: 8px; }
     th { background: #241a30; }
     .meta { color: #888; }
     .tag { background: #581c87; color: #e9d5ff; padding: 4px 12px; border-radius: 99px; font-size: 0.85rem; margin-bottom: 1rem; display: inline-block; }
     .nav { position: fixed; bottom: 24px; right: 24px; color: #555; }
-    .check { color: #a78bfa; }
   </style>
 </head>
 <body>
 
 <section class="slide active">
-  <span class="tag">Урок 6 · Финал</span>
-  <h1>AI-native профессионал</h1>
-  <p class="meta">Глава 5 · theory.md</p>
-  <p>Жить с AI-кодом: контроль, деньги, процесс, демо.</p>
+  <span class="tag">Встреча 3 из 3 · Финал</span>
+  <h1>Демо-день</h1>
+  <p class="meta">Урок 6</p>
+  <p>3 встречи → <strong>5 минут показа</strong>. Слайды не нужны — нужен клик.</p>
 </section>
 
 <section class="slide">
-  <h1>AI-native — это</h1>
-  <ul>
-    <li>Задачи под агента + декомпозиция</li>
-    <li>Скрипт / RAG / Perplexity — когда что</li>
-    <li>.env, git, ревью diff</li>
-    <li>Golden tests, скиллы, MCP</li>
-    <li>Принял код = <strong>твой</strong> код</li>
-  </ul>
+  <h1>Дорожка курса</h1>
+  <pre>4 — project.md + агенты + MVP
+5 — бот/app + faq + тестеры
+6 — вы здесь</pre>
 </section>
 
 <section class="slide">
-  <h1>Карта стека</h1>
-  <pre>ТЫ (задача, ревью, этика)
-  ↓
-Cursor + скиллы + CLAUDE.md
-  ↓
-MCP · субагенты · скрипты
-  ↓
-OpenRouter · Perplexity · Parallel
-  ↓
-Supabase · Telegram · Vercel</pre>
-</section>
-
-<section class="slide">
-  <h1>Git = страховка</h1>
-  <pre>git commit -m "chore: перед большой правкой"
-# агент работает...
-# сломалось → git reset --hard HEAD</pre>
-  <p>Семантика: feat / fix / refactor / docs</p>
-</section>
-
-<section class="slide">
-  <h1>Code review AI-кода</h1>
-  <ol>
-    <li>«Объясни как непрограммисту»</li>
-    <li>«Ты злой ревьюер»</li>
-    <li>Чеклист: .env, пустой ввод, логи</li>
-    <li>Смотри diff — много красного = стоп</li>
-  </ol>
-</section>
-
-<section class="slide">
-  <h1>Техдолг</h1>
-  <p>Вайбкодинг быстрый → мусор быстрый</p>
-  <p>После фичи: дубли, debug, функции &gt; 30 строк</p>
-  <p><code>TECH-DEBT.md</code> — что отложили</p>
-</section>
-
-<section class="slide">
-  <h1>Human-in-the-loop</h1>
+  <h1>5 минут — структура</h1>
   <table>
-    <tr><th>AI</th><th>Ты</th></tr>
-    <tr><td>Черновик</td><td>Финал клиенту</td></tr>
-    <tr><td>Код</td><td>Auth, деньги, PII</td></tr>
-    <tr><td>Идеи</td><td>Решение</td></tr>
+    <tr><th>Время</th><th>Что</th></tr>
+    <tr><td>0:30</td><td>Кому, какая рутина</td></tr>
+    <tr><td>3:00</td><td>Живое демо</td></tr>
+    <tr><td>1:00</td><td>Стек + verdict</td></tr>
+    <tr><td>0:30</td><td>Цитата из feedback.md</td></tr>
   </table>
 </section>
 
 <section class="slide">
-  <h1>Стоимость</h1>
-  <pre>Счёт ≈ токены × цена × пользователи</pre>
+  <h1>Запрещено на демо</h1>
   <ul>
-    <li>Flash для рутины</li>
-    <li>RAG top-3, не top-20</li>
-    <li>Кэш FAQ</li>
-    <li>Rate limit</li>
+    <li>Слово «нейросеть» / «AI» вместо клика</li>
+    <li>PowerPoint вместо продукта</li>
+    <li>Читать код построчно</li>
   </ul>
 </section>
 
 <section class="slide">
-  <h1>PROMPTS.md</h1>
-  <p>Версии системных промптов в git</p>
-  <p>v3: добавили «не знаю»</p>
-  <p>v2: FAQ ушёл в RAG</p>
-  <p>→ видно что сломало golden tests</p>
+  <h1>Если сломалось</h1>
+  <p>Скринкаст 30 сек + честно «вот что чиню».</p>
+  <p>Это нормально. Демо ≠ продакшн.</p>
 </section>
 
 <section class="slide">
-  <h1>Инциденты</h1>
-  <ol>
-    <li>Выключи бота</li>
-    <li>Логи</li>
-    <li>Фикс промпта/RAG</li>
-    <li>Golden tests</li>
-    <li>Включи · запиши в INCIDENTS.md</li>
-  </ol>
+  <h1>Code review в парах</h1>
+  <pre>project.md + verdict.md
+1. Хорошо
+2. Опасно на демо
+3. Три правки</pre>
 </section>
 
 <section class="slide">
-  <h1>Приватность</h1>
+  <h1>Зачёт</h1>
   <ul>
-    <li>Не слать PII в API</li>
-    <li>Логи без персональных данных</li>
-    <li>Право на удаление в БД</li>
+    <li>project.md</li>
+    <li>Работает: ссылка или @бот</li>
+    <li>feedback.md — цитата вне курса</li>
+    <li>5 мин живьём</li>
   </ul>
 </section>
 
 <section class="slide">
-  <h1>Демо 5 минут</h1>
-  <table>
-    <tr><th>Время</th><th>Блок</th></tr>
-    <tr><td>0:30</td><td>Какую проблему решает</td></tr>
-    <tr><td>2:00</td><td>Живое демо</td></tr>
-    <tr><td>1:00</td><td>Что узнал</td></tr>
-    <tr><td>0:30</td><td>Шаг на месяц</td></tr>
-  </table>
-</section>
-
-<section class="slide">
-  <h1>Чеклист AI-native</h1>
-  <ul>
-    <li class="check">□ Продукт с AI по ссылке</li>
-    <li class="check">□ RAG + «не знаю»</li>
-    <li class="check">□ .env + gitignore</li>
-    <li class="check">□ 3+ скилла или MCP</li>
-    <li class="check">□ Golden tests</li>
-    <li class="check">□ Perplexity или Parallel</li>
-    <li class="check">□ Объясню код простыми словами</li>
-  </ul>
-</section>
-
-<section class="slide">
-  <h1>6 уроков — путь</h1>
-  <table>
-    <tr><th>#</th><th>Тема</th></tr>
-    <tr><td>1</td><td>Веб, деплой</td></tr>
-    <tr><td>2</td><td>Модель, API</td></tr>
-    <tr><td>3</td><td>Промпты, БД, скрипты</td></tr>
-    <tr><td>4</td><td>Агенты, MCP</td></tr>
-    <tr><td>5</td><td>RAG, бот, security</td></tr>
-    <tr><td>6</td><td>Процесс, демо</td></tr>
-  </table>
-  <p class="meta">docs/ai-native-map.md</p>
-</section>
-
-<section class="slide">
-  <h1>Спасибо 🎉</h1>
-  <p>Дальше — углубление в <strong>свою</strong> профессию, не новые buzzwords.</p>
+  <h1>После курса</h1>
+  <p>Итерации: скиллы · агенты · faq · фидбек.</p>
+  <p>Теория: <code>theory.md</code> · <code>docs/research-apis.md</code></p>
+  <p class="meta">Спасибо. Вопросы в чат группы.</p>
 </section>
 
 <script>
