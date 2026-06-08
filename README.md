@@ -22,6 +22,10 @@
 
 **Один проект на все три встречи.** На созвоне: `slides.html` + `whattodoo.md`. Теория дома: `theory.md`. Карта: `docs/ai-native-map.md`. Поиск: `docs/research-apis.md`, `examples/research/`.
 
+**Планы по проектам (после созвона 6 июня):** [`docs/projects/`](docs/projects/README.md) — стратегия и тактика каждому участнику.
+
+**Сайт курса (слайды в браузере):** [ivanvenberg.github.io/aicourse](https://ivanvenberg.github.io/aicourse/)
+
 ---
 
 ## Ближайшая встреча и Zoom

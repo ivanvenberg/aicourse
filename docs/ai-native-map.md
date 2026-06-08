@@ -42,6 +42,13 @@ lesson-N/homework.md   ← после встречи
 | `docs/research-apis.md` | Полная глава |
 | `examples/research/` | Скрипты |
 
+## Проекты группы (после 6 июня)
+
+| Файл | Содержание |
+|------|------------|
+| `docs/projects/README.md` | Индекс + общие правила |
+| `docs/projects/*.md` | Стратегия + тактика каждому |
+
 ## API-ключи
 
 Шаблон: `docs/env.example` → `.env` (не в git)
