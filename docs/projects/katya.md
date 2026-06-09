@@ -15,6 +15,24 @@ Jira → твой сервер → Slack (и Figma, когда plugin готов
 
 ---
 
+## Деньги (важно)
+
+**Неделя 1 = 0 ₽ из своего кармана** (Jira/Slack — корпоративные, если есть).
+
+| Что | Цена | Нужно сейчас? |
+|-----|------|----------------|
+| Cursor | уже есть | да |
+| Vercel Hobby | бесплатно | да |
+| Slack Incoming Webhook | бесплатно | да, если дадут |
+| **Mock:** `curl` + `fixtures/jira_issue_created.json` | 0 ₽ | **да**, если IT тормозит |
+| ngrok | free tier (лимиты) | опционально для теста |
+| Railway / ngrok paid | **⚠️ ~$5+** | **нет**, пока mock работает |
+| OpenRouter в webhook | **платно** | **нет** |
+
+**Реалистичный demo без IT:** показала spec + curl → файл в `logs/` + «в Slack уйдёт, когда дадут URL».
+
+---
+
 ## План на эту неделю
 
 ### 1. project.md (~30 мин)
@@ -91,7 +109,7 @@ Jira → твой сервер → Slack (и Figma, когда plugin готов
 
 - 403 от Jira/Figma — **код ошибки** в чат, не токены
 - Нет admin webhook → **Jira Automation**
-- Vercel blocked → Railway или mock на созвоне
+- Vercel blocked → **mock на созвоне** (curl + fixture), Railway — только если сама готова платить
 
 ---
 

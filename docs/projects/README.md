@@ -25,7 +25,8 @@ git pull   # в папке aicourse
 
 1. [`project-template.md`](../../lesson-4/project-template.md) → `project.md` в корне проекта  
 2. Ключи — в `.env`, не в git ([`env.example`](../env.example))  
-3. Проверка «данные не врут» — шаблон [`manual-check-template.md`](agents/manual-check-template.md)
+3. Проверка «данные не врут» — [`manual-check-template.md`](agents/manual-check-template.md)  
+4. **Деньги:** неделя 1 без платных API — сводка [`agents/budget-review.md`](agents/budget-review.md)
 
 ---
 
