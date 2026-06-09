@@ -147,6 +147,8 @@ README: npm install && npm run dev
 
 ---
 
+### 3. schema.md (~15 мин)
+
 Коротко опиши: пользователь, задачи, клетки `{x, y, sprite}`.
 
 ---
